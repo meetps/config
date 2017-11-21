@@ -1,0 +1,22 @@
+[user]
+	name = meetshah1995
+	email = meetshah1995@gmail.com
+
+[url "https://github.com/"]
+    insteadOf = gh:
+
+[url "https://gist.github.com/"]
+    insteadOf = gist:
+
+[url "https://bitbucket.org/"]
+    insteadOf = bb:
+
+[credential]
+	helper = cache
+[core]
+    editor = vim
+[push]
+    default = simple
+[color]
+    ui = true
+
