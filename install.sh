@@ -10,10 +10,10 @@ sudo apt update
 sudo apt install vim
 
 # Setup git
-cp .gitconfig ~/.gitconfig
+cp git/gitconfig ~/.gitconfig
 
 # Make directory for bundles
 mkdir ~/.vim/bundle
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-cp .vimrc ~/.vimrc
+cp vim/vimrc ~/.vimrc
 vim +PluginInstall!
