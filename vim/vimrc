@@ -1,8 +1,23 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-" General
-set number
+" General                                                                       
+set number                                                                      
+set encoding=utf-8                                                              
+set showcmd                                                                     
+set splitright                                                                  
+set nowrap                                                                      
+set tabstop=4 shiftwidth=4                                                      
+set expandtab                                                                   
+set lazyredraw                                                                  
+set colorcolumn=80                                                              
+highlight colorcolumn ctermbg=DarkBlue                                          
+                                                                                
+" Searching                                                                     
+set hlsearch                                                                    
+set incsearch                                                                   
+set ignorecase                                                                  
+set smartcase       
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
