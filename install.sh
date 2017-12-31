@@ -16,6 +16,10 @@ cp git/gitconfig ~/.gitconfig
 sudo cp imgur/imgur /bin/imgur
 sudo chmod +x /bin/imgur
 
+# Setup VS Code
+cp vscode/keybindings.json $HOME/.config/Code/User/keybindings.json
+cp vscode/settings.json $HOME/.config/Code/User/settings.json
+
 # Make directory for bundles
 mkdir ~/.vim/bundle
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
