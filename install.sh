@@ -1,6 +1,6 @@
 #####################################################
 #
-# Install Vim and configure git
+# Config Personal Environment
 #
 #####################################################
 
@@ -11,6 +11,10 @@ sudo apt install vim
 
 # Setup git
 cp git/gitconfig ~/.gitconfig
+
+# Setup imgur 
+sudo cp imgur/imgur /bin/imgur
+sudo chmod +x /bin/imgur
 
 # Make directory for bundles
 mkdir ~/.vim/bundle
