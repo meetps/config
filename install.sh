@@ -16,6 +16,11 @@ cp git/gitconfig ~/.gitconfig
 sudo cp imgur/imgur /bin/imgur
 sudo chmod +x /bin/imgur
 
+# Setup visdom
+sudo python -m pip install "visdom=0.1.6.5"
+sudo cp visdom/visdom /bin/visdom
+sudo chmod +x /bin/visdom
+
 # Setup VS Code
 cp vscode/keybindings.json $HOME/.config/Code/User/keybindings.json
 cp vscode/settings.json $HOME/.config/Code/User/settings.json
