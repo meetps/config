@@ -12,6 +12,11 @@ sudo apt install vim
 # Setup git
 cp git/gitconfig ~/.gitconfig
 
+# Setup zsh and oh-my-zsh
+sudo apt-get install zsh
+whoami | xargs -n 1 sudo chsh -s $(which zsh) $1
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
 # Setup imgur 
 sudo cp imgur/imgur /bin/imgur
 sudo chmod +x /bin/imgur
