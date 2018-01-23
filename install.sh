@@ -14,6 +14,8 @@ sudo apt-get install ncdu
 
 # Setup git
 cp git/gitconfig ~/.gitconfig
+sudo cp git/redate /bin/redate
+sudo chmod +x /bin/redate
 
 # Setup zsh and oh-my-zsh
 sudo apt-get install zsh
