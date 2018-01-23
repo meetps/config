@@ -9,6 +9,9 @@ sudo add-apt-repository ppa:jonathonf/vim
 sudo apt update
 sudo apt install vim
 
+# Install misc stuff
+sudo apt-get install ncdu
+
 # Setup git
 cp git/gitconfig ~/.gitconfig
 
