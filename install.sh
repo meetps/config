@@ -27,7 +27,7 @@ sudo cp imgur/imgur /bin/imgur
 sudo chmod +x /bin/imgur
 
 # Setup visdom
-sudo python -m pip install "visdom=0.1.6.5"
+sudo python -m pip install "visdom==0.1.6.5"
 sudo cp visdom/visdom /bin/visdom
 sudo chmod +x /bin/visdom
 
@@ -39,8 +39,14 @@ cp vscode/settings.json $HOME/.config/Code/User/settings.json
 sudo cp rmate/rmate /bin/rmate
 sudo chmod +x /bin/rmate
 
-# Make directory for bundles
+# Make directory for bundles and colors
 mkdir ~/.vim/bundle
+mkdir ~/.vim/colors
+
+# Copy color scheme
+cp vim/monokai.vim ~/.vim/colors/
+
+# Clone and Install vundle
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 cp vim/vimrc ~/.vimrc
 vim +PluginInstall!
