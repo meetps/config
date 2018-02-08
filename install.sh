@@ -21,6 +21,8 @@ sudo chmod +x /bin/redate
 sudo apt-get install zsh
 whoami | xargs -n 1 sudo chsh -s $(which zsh) $1
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+mv ~/.zshrc ~/.zshrc_old
+cp zsh/zshrc ~/.zshrc
 
 # Setup imgur 
 sudo cp imgur/imgur /bin/imgur
@@ -50,3 +52,5 @@ cp vim/monokai.vim ~/.vim/colors/
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 cp vim/vimrc ~/.vimrc
 vim +PluginInstall!
+
+
