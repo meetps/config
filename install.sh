@@ -35,6 +35,10 @@ sudo chmod +x /bin/visdom
 cp vscode/keybindings.json $HOME/.config/Code/User/keybindings.json
 cp vscode/settings.json $HOME/.config/Code/User/settings.json
 
+# Setup rmate
+sudo cp rmate/rmate /bin/rmate
+sudo chmod +x /bin/rmate
+
 # Make directory for bundles
 mkdir ~/.vim/bundle
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
