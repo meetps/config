@@ -11,12 +11,17 @@ import numpy as np
 
 n_images = len(sys.argv) -1
 
-vis = visdom.Visdom(env='main')
+vis = visdom.Visdom(env='main', port=443)
 
 if vis.check_connection():
     for i in sys.argv[1:]:
-        vis.image(misc.imread(i).transpose(2,0,1),
-                  opts=dict(caption=i))
+        img = misc.imread(i)
+        if len(img.shape) == 2:
+            pass
+        elif len(img.shape) == 3:
+            img = img.transpose(2,0,1)
+        vis.image(img, opts=dict(caption=i))
+
 else:
-    print "Please start server `python -m visdom.server`"
+    print "Please start server `python -m visdom.server --port 443`"
 
