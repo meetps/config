@@ -19,10 +19,10 @@ fi
 # Install Vim 8.0
 sudo add-apt-repository ppa:jonathonf/vim
 sudo apt update
-sudo apt install vim
+sudo apt install -y vim
 
 # Install misc stuff
-sudo apt-get install ncdu
+sudo apt-get install -y ncdu
 
 # Setup git
 cp $CONFIGDIR/git/gitconfig ~/.gitconfig
@@ -30,7 +30,7 @@ sudo cp $CONFIGDIR/git/redate /bin/redate
 sudo chmod +x /bin/redate
 
 # Setup zsh and oh-my-zsh
-sudo apt-get install zsh
+sudo apt-get install -y zsh
 whoami | xargs -n 1 sudo chsh -s $(which zsh) $1
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 mv ~/.zshrc ~/.zshrc_old
