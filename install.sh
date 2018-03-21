@@ -33,6 +33,8 @@ sudo chmod +x /bin/redate
 sudo apt-get install zsh
 whoami | xargs -n 1 sudo chsh -s $(which zsh) $1
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+mv ~/.zshrc ~/.zshrc_old
+cp $CONFIGDIR/zsh/zshrc ~/.zshrc
 
 # Setup imgur 
 sudo cp $CONFIGDIR/imgur/imgur /bin/imgur
@@ -47,8 +49,18 @@ sudo chmod +x /bin/visdom
 cp $CONFIGDIR/vscode/keybindings.json $HOME/.config/Code/User/keybindings.json
 cp $CONFIGDIR/vscode/settings.json $HOME/.config/Code/User/settings.json
 
-# Make directory for bundles
+# Setup rmate
+sudo cp $CONFIGDIR/rmate/rmate /bin/rmate
+sudo chmod +x /bin/rmate
+
+# Make directory for bundles and colors
 mkdir ~/.vim/bundle
+mkdir ~/.vim/colors
+
+# Copy color scheme
+cp $CONFIGDIR/vim/monokai.vim ~/.vim/colors/
+
+# Clone and Install vundle
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 cp $CONFIGDIR/vim/vimrc ~/.vimrc
 vim +PluginInstall!
