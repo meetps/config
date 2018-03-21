@@ -4,7 +4,7 @@
 #
 #####################################################
 
-URL=git@github.com:meetshah1995/config.git
+URL=https://github.com/meetshah1995/config.git
 CONFIGDIR=$HOME/.mconfig
 
 if [ ! -d "$CONFIGDIR" ] ; then
