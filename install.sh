@@ -8,10 +8,10 @@ URL=https://github.com/meetshah1995/config.git
 CONFIGDIR=$HOME/.mconfig
 
 if [ ! -d "$CONFIGDIR" ] ; then
-    echo "REPo doesn't exist at $CONFIGDIR, cloning"
+    echo "Config repo doesn't exist at $CONFIGDIR, cloning"
     git clone "$URL" "$CONFIGDIR"
 else
-    echo "REPO exists at $CONFIGDIR, checking for updates"
+    echo "Config repo exists at $CONFIGDIR, checking for updates"
     cd "$CONFIGDIR"
     git pull "$URL"
 fi
@@ -59,6 +59,9 @@ mkdir ~/.vim/colors
 
 # Copy color scheme
 cp $CONFIGDIR/vim/monokai.vim ~/.vim/colors/
+
+# Copy config to terminator
+cp $CONFIGDIR/terminator/config ~/.config/terminator/config
 
 # Clone and Install vundle
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
