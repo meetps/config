@@ -1,0 +1,64 @@
+[global_config]
+[keybindings]
+[layouts]
+  [[default]]
+    [[[child0]]]
+      fullscreen = False
+      last_active_term = c60b83b8-acb8-4d20-b950-a62e3a421b5c
+      last_active_window = True
+      maximised = True
+      order = 0
+      parent = ""
+      position = 0:54
+      size = 1680, 1026
+      title = meetshah1995@zeitgeist: ~
+      type = Window
+    [[[child1]]]
+      order = 0
+      parent = child0
+      position = 835
+      ratio = 0.499702380952
+      type = HPaned
+    [[[child3]]]
+      order = 1
+      parent = child1
+      position = 508
+      ratio = 0.499512670565
+      type = VPaned
+    [[[child5]]]
+      order = 1
+      parent = child3
+      position = 413
+      ratio = 0.499401913876
+      type = HPaned
+    [[[terminal2]]]
+      order = 0
+      parent = child1
+      profile = default
+      type = Terminal
+      uuid = c60b83b8-acb8-4d20-b950-a62e3a421b5c
+    [[[terminal4]]]
+      order = 0
+      parent = child3
+      profile = default
+      type = Terminal
+      uuid = b3a2ca9b-1811-45f1-bbf5-9bc397e78709
+    [[[terminal6]]]
+      order = 0
+      parent = child5
+      profile = default
+      type = Terminal
+      uuid = cc33dc8e-fddb-452f-91c1-d1df177a8cfd
+    [[[terminal7]]]
+      order = 1
+      parent = child5
+      profile = default
+      type = Terminal
+      uuid = 14e7d259-024f-4f22-bc87-452f48dec812
+[plugins]
+[profiles]
+  [[default]]
+    background_darkness = 0.73
+    background_image = None
+    background_type = transparent
+    foreground_color = "#00ff00"
