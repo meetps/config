@@ -4,41 +4,53 @@
 #
 #####################################################
 
+URL=https://github.com/meetshah1995/config.git
+CONFIGDIR=$HOME/.mconfig
+
+if [ ! -d "$CONFIGDIR" ] ; then
+    echo "REPo doesn't exist at $CONFIGDIR, cloning"
+    git clone "$URL" "$CONFIGDIR"
+else
+    echo "REPO exists at $CONFIGDIR, checking for updates"
+    cd "$CONFIGDIR"
+    git pull "$URL"
+fi
+
 # Install Vim 8.0
 sudo add-apt-repository ppa:jonathonf/vim
 sudo apt update
-sudo apt install vim
+sudo apt install -y vim
 
 # Install misc stuff
-sudo apt-get install ncdu
+sudo apt-get install -y ncdu
 
 # Setup git
-cp git/gitconfig ~/.gitconfig
-sudo cp git/redate /bin/redate
+cp $CONFIGDIR/git/gitconfig ~/.gitconfig
+sudo cp $CONFIGDIR/git/redate /bin/redate
 sudo chmod +x /bin/redate
 
 # Setup zsh and oh-my-zsh
-sudo apt-get install zsh
+sudo apt-get install -y zsh
 whoami | xargs -n 1 sudo chsh -s $(which zsh) $1
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 mv ~/.zshrc ~/.zshrc_old
-cp zsh/zshrc ~/.zshrc
+cp $CONFIGDIR/zsh/zshrc ~/.zshrc
 
 # Setup imgur 
-sudo cp imgur/imgur /bin/imgur
+sudo cp $CONFIGDIR/imgur/imgur /bin/imgur
 sudo chmod +x /bin/imgur
 
 # Setup visdom
-sudo python -m pip install "visdom==0.1.6.5"
-sudo cp visdom/visdom /bin/visdom
+sudo python -m pip install "visdom=0.1.6.5"
+sudo cp $CONFIGDIR/visdom/visdom /bin/visdom
 sudo chmod +x /bin/visdom
 
 # Setup VS Code
-cp vscode/keybindings.json $HOME/.config/Code/User/keybindings.json
-cp vscode/settings.json $HOME/.config/Code/User/settings.json
+cp $CONFIGDIR/vscode/keybindings.json $HOME/.config/Code/User/keybindings.json
+cp $CONFIGDIR/vscode/settings.json $HOME/.config/Code/User/settings.json
 
 # Setup rmate
-sudo cp rmate/rmate /bin/rmate
+sudo cp $CONFIGDIR/rmate/rmate /bin/rmate
 sudo chmod +x /bin/rmate
 
 # Make directory for bundles and colors
@@ -46,11 +58,9 @@ mkdir ~/.vim/bundle
 mkdir ~/.vim/colors
 
 # Copy color scheme
-cp vim/monokai.vim ~/.vim/colors/
+cp $CONFIGDIR/vim/monokai.vim ~/.vim/colors/
 
 # Clone and Install vundle
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-cp vim/vimrc ~/.vimrc
+cp $CONFIGDIR/vim/vimrc ~/.vimrc
 vim +PluginInstall!
-
-
