@@ -1,8 +1,18 @@
 #####################################################
 #
-# Config Personal Environment
+#          Personal Environment Config
+#            
+#                    .--.
+#          ::\`--._,'.::.`._.--'/::::
+#          ::::.  ` __::__ '  .::::::
+#          ::::::-:.`'..`'.:-::::::::
+#          ::::::::\ `--' /::::::::::
+#                    '--'
 #
+#                  Try not.
+#         Do or do not. There is no try.
 #####################################################
+
 
 URL=https://github.com/meetshah1995/config.git
 CONFIGDIR=$HOME/.mconfig
