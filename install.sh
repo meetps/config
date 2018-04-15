@@ -51,7 +51,7 @@ sudo cp $CONFIGDIR/imgur/imgur /bin/imgur
 sudo chmod +x /bin/imgur
 
 # Setup visdom
-sudo python -m pip install "visdom=0.1.6.5"
+sudo python -m pip install "visdom==0.1.6.5"
 sudo cp $CONFIGDIR/visdom/visdom /bin/visdom
 sudo chmod +x /bin/visdom
 
