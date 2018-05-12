@@ -14,19 +14,27 @@ plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
+# Git aliases
 alias ga="git add"
 alias gc="git commit -m"
 alias gp="git push"
+
+# Utility
 alias naut="nautilus ."
 alias mp3='youtube-dl --extract-audio --audio-format mp3'
 alias jn='jupyter notebook'
 alias tatti="printf '\e[?2004l'"
 alias cgrep="grep -B 5 -A 5"
 
+# VPN Aliases
+alias instiin="sudo systemctl start openvpn@iitbvpn.service"
+alias instiout="sudo systemctl stop openvpn@iitbvpn.service"
+
+# SSH Aliases (Copy from private file)
+
+
 function gdate_() { sudo date -s "$(wget -qSO- --max-redirect=0 google.com 2>&1 | grep Date: | cut -d' ' -f5-8)Z" } 
 alias gdate="gdate_"
-
-
 
 
 export CUDA_HOME=/usr/local/cuda-8.0
