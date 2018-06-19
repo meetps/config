@@ -32,7 +32,7 @@ sudo apt update
 sudo apt install -y vim
 
 # Install misc stuff
-sudo apt-get install -y ncdu
+sudo apt-get install -y ncdu tmux
 
 # Setup git
 cp $CONFIGDIR/git/gitconfig ~/.gitconfig
@@ -62,6 +62,10 @@ cp $CONFIGDIR/vscode/settings.json $HOME/.config/Code/User/settings.json
 # Setup rmate
 sudo cp $CONFIGDIR/rmate/rmate /bin/rmate
 sudo chmod +x /bin/rmate
+
+# Setup tmux
+sudo cp tmux/tmux.conf $HOME/.tmux.conf
+tmux source-file ~/.tmux.conf
 
 # Make directory for bundles and colors
 mkdir ~/.vim/bundle
