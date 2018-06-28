@@ -25,6 +25,7 @@ alias mp3='youtube-dl --extract-audio --audio-format mp3'
 alias jn='jupyter notebook'
 alias tatti="printf '\e[?2004l'"
 alias cgrep="grep -B 5 -A 5"
+alias compress-pdf="gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/screen -dNOPAUSE -dQUIET -dBATCH -sOutputFile=$2 $1"
 
 # VPN Aliases
 alias instiin="sudo systemctl start openvpn@iitbvpn.service"
