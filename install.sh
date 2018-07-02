@@ -77,6 +77,11 @@ cp $CONFIGDIR/vim/monokai.vim ~/.vim/colors/
 # Copy config to terminator
 cp $CONFIGDIR/terminator/config ~/.config/terminator/config
 
+# Copy Ipython and Python configs
+cp $CONFIGDIR/python/ipython_config ~/.ipython/ipython_config.py
+cp $CONFIGDIR/python/loadpy /bin/loadpy
+sudo chmod +x /bin/loadpy
+
 # Clone and Install vundle
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 cp $CONFIGDIR/vim/vimrc ~/.vimrc
