@@ -39,6 +39,11 @@ cp $CONFIGDIR/git/gitconfig ~/.gitconfig
 sudo cp $CONFIGDIR/git/redate /bin/redate
 sudo chmod +x /usr/bin/redate
 
+#Setup fancy diff
+sudo cp $CONFIGDIR/git/diff-so-fancy /usr/bin/diff-so-fancy
+sudo chmod +x /usr/bin/diff-so-fancy
+
+
 # Setup zsh and oh-my-zsh
 sudo apt-get install -y zsh
 whoami | xargs -n 1 sudo chsh -s $(which zsh) $1
