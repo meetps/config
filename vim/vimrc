@@ -20,10 +20,10 @@ set ignorecase
 set smartcase       
 
 " Navigation
-nnoremap <C-Down>  <C-W><C-J>
-nnoremap <C-Up>    <C-W><C-K>
-nnoremap <C-Right> <C-W><C-L>
-nnoremap <C-Left>  <C-W><C-H>
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 
 " Resizing Splits
 nnoremap <S-Right> <C-W><lt>
@@ -51,6 +51,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 map <C-n> :NERDTreeToggle<CR>
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
+let NERDTreeIgnore = ['\.pyc$']
 
 " Airline
 let g:airline#extensions#tabline#enabled = 1
