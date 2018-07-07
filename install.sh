@@ -42,7 +42,7 @@ dependencies () {
 # Setup git
 git_update() {
     cp $CONFIGDIR/git/gitconfig ~/.gitconfig
-    sudo cp $CONFIGDIR/git/redate /bin/redate
+    sudo cp $CONFIGDIR/git/redate /usr/bin/redate
     sudo chmod +x /usr/bin/redate
 
     #Setup fancy diff
@@ -80,7 +80,7 @@ vim_update() {
 
 # Setup imgur 
 imgur_update() {
-    sudo cp $CONFIGDIR/imgur/imgur /bin/imgur
+    sudo cp $CONFIGDIR/imgur/imgur /usr/bin/imgur
     sudo chmod +x /usr/bin/imgur
     echo "imgur updated";
 }
@@ -88,7 +88,7 @@ imgur_update() {
 # Setup visdom
 visdom_update() {
     sudo python -m pip install "visdom==0.1.6.5"
-    sudo cp $CONFIGDIR/visdom/visdom /bin/visdom
+    sudo cp $CONFIGDIR/visdom/visdom /usr/bin/visdom
     sudo chmod +x /usr/bin/visdom
     echo "visdom updated";
 }
@@ -102,7 +102,7 @@ vscode_update() {
 
 # Setup rmate
 rmate_update() {
-    sudo cp $CONFIGDIR/rmate/rmate /bin/rmate
+    sudo cp $CONFIGDIR/rmate/rmate /usr/bin/rmate
     sudo chmod +x /usr/bin/rmate
     echo "rmate updated";
 }
