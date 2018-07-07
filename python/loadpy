@@ -21,7 +21,7 @@ def print_info(filepath=None):
             print("="*80)
             print(filepath)
             dic = json.load(open(filepath))
-            print("Keys:" dic.keys())
+            print("Keys:", dic.keys())
 
         elif ext in ['png', 'jpg', 'bmp', 'JPG', 'tif']:
             print("="*80)
