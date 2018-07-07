@@ -1,9 +1,11 @@
 #!/bin/bash
 
-source ./install.sh &&#
+source ./install.sh
 
+echo $1
 # Update local repo everytime
 basic_update
+
 
 case $1 in
     --python )
