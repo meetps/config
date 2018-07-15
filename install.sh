@@ -35,7 +35,7 @@ dependencies () {
     sudo apt install -y vim
 
     # Install misc stuff
-    sudo apt-get install -y ncdu tmux
+    sudo apt-get install -y ncdu tmux ranger
     echo "Dependencies installed";
 }
 
@@ -142,7 +142,7 @@ common_update() {
 
 # Call device specific functions
 if [ "$1" = "server" ] ; then
-    common_updates
+    common_update
     rmate_update
 elif [ "$1" = "laptop" ] ; then
     common_update
