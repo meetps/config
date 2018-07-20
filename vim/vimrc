@@ -39,6 +39,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'bling/vim-airline'
+Plugin 'Valloric/YouCompleteMe'
 call vundle#end()            " required
 
 filetype plugin indent on    " required
@@ -56,7 +57,9 @@ let NERDTreeIgnore = ['\.pyc$']
 " Airline
 let g:airline#extensions#tabline#enabled = 1
 
-" Jedi - Padawan I always shall be
+" YCM & Jedi - Padawan I always shall be
+let g:ycm_autoclose_preview_window_after_completion=1
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR> 
 
 " ColorScheme
 syntax enable
