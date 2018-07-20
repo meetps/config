@@ -138,7 +138,6 @@ common_update() {
     dependencies
     imgur_update
     visdom_update
-    vim_update
     python_update
     tmux_update
     rmate_update
@@ -148,10 +147,13 @@ common_update() {
 if [ "$1" = "server" ] ; then
     common_update
     rmate_update
+    vim_update
+
 elif [ "$1" = "laptop" ] ; then
     common_update
     terminator_update
     vscode_update
+    vim_update
 else
     echo "Only laptop and server supported, $1 not supported"
 fi
