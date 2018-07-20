@@ -70,6 +70,10 @@ vim_update() {
     # Copy color scheme
     cp $CONFIGDIR/vim/monokai.vim ~/.vim/colors/
     
+    # Vimcat binary
+    sudo cp $CONFIGDIR/vim/vimcat /usr/bin/vimcat
+    sudo chmod +x /usr/bin/vimcat
+
     # Clone and Install vundle
     git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
     cp $CONFIGDIR/vim/vimrc ~/.vimrc

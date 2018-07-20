@@ -1,5 +1,10 @@
 [global_config]
 [keybindings]
+  layout_launcher = <Alt><Shift>L
+  go_down = <Alt>J
+  go_left = <Alt>H
+  go_right = <Alt>L
+  go_up = <Alt>K
 [layouts]
   [[default]]
     [[[child0]]]
