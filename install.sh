@@ -35,7 +35,7 @@ dependencies () {
     sudo apt install -y vim
 
     # Install misc stuff
-    sudo apt-get install -y ncdu tmux
+    sudo apt-get install -y ncdu tmux ranger
     echo "Dependencies installed";
 }
 
