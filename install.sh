@@ -113,7 +113,7 @@ rmate_update() {
 
 # Setup tmux
 tmux_update() {
-    sudo cp tmux/tmux.conf $HOME/.tmux.conf
+    cp tmux/tmux.conf $HOME/.tmux.conf
     tmux source-file ~/.tmux.conf
     echo "tmux updated";
 }
