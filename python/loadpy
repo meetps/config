@@ -8,8 +8,8 @@ import sys
 import json
 import pickle
 
-import scipy.misc as misc
 import numpy as np
+import scipy as misc
 
 n_files = len(sys.argv) -1
 
