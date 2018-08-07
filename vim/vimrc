@@ -8,6 +8,7 @@ set showcmd
 set splitright                                                                  
 set nowrap                                                                      
 set tabstop=4 shiftwidth=4                                                      
+set smartindent
 set expandtab                                                                   
 set lazyredraw                                                                  
 set colorcolumn=80                                                              
@@ -24,6 +25,8 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+nnoremap <Tab> :bnext<CR>
+nnoremap <S-Tab> :bprevious<CR>
 
 " Resizing Splits
 nnoremap <S-Right> <C-W><lt>
@@ -39,7 +42,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'bling/vim-airline'
-Plugin 'Valloric/YouCompleteMe'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
 call vundle#end()            " required
 
 filetype plugin indent on    " required
@@ -53,6 +56,7 @@ map <C-n> :NERDTreeToggle<CR>
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
 let NERDTreeIgnore = ['\.pyc$']
+let NERDTreeQuitOnOpen = 1
 
 " Airline
 let g:airline#extensions#tabline#enabled = 1
