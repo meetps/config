@@ -13,6 +13,7 @@ ZSH_THEME="robbyrussell"
 plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
+source transfer.sh
 
 # Git aliases
 alias ga="git add"
