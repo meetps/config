@@ -114,6 +114,7 @@ rmate_update() {
 # Setup tmux
 tmux_update() {
     cp tmux/tmux.conf $HOME/.tmux.conf
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
     tmux source-file ~/.tmux.conf
     echo "tmux updated";
 }
