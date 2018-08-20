@@ -11,6 +11,7 @@ set tabstop=4 shiftwidth=4
 set smartindent
 set expandtab                                                                   
 set lazyredraw                                                                  
+set updatetime=100
 set colorcolumn=80                                                              
 highlight colorcolumn ctermbg=DarkBlue                                          
                                                                                 
@@ -43,6 +44,7 @@ Plugin 'davidhalter/jedi-vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'bling/vim-airline'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'airblade/vim-gitgutter'
 call vundle#end()            " required
 
 filetype plugin indent on    " required
