@@ -9,7 +9,7 @@ import json
 import pickle
 
 import numpy as np
-import scipy as misc
+from PIL import Image
 
 n_files = len(sys.argv) -1
 
@@ -26,7 +26,7 @@ def print_info(filepath=None):
         elif ext in ['png', 'jpg', 'bmp', 'JPG', 'tif']:
             print("="*80)
             print(filepath)
-            print(misc.imread(filepath).shape)
+            print(np.asarray(Image.open(filepath)).shape)
 
         elif ext == 'pkl':
             print("="*80)
