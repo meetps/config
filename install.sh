@@ -35,7 +35,7 @@ dependencies () {
     sudo apt install -y vim
 
     # Install misc stuff
-    sudo apt-get install -y ncdu tmux ranger
+    sudo apt-get install -y ncdu tmux ranger w3m
     echo "Dependencies installed";
 }
 
@@ -129,8 +129,15 @@ python_update() {
     # Copy Ipython and Python configs
     cp $CONFIGDIR/python/ipython_config ~/.ipython/ipython_config.py
     cp $CONFIGDIR/python/loadpy /usr/bin/loadpy
+    cp $CONFIGDIR/python/jupyter_notebook_config.py ~/.jupyter/jupyter_notebook_config.py
     sudo chmod +x /usr/bin/loadpy
     echo "python updated";
+}
+
+ranger_update() {
+    # Copy Ipython and Python configs
+    cp $CONFIGDIR/ranger/* ~/.config/ranger/
+    echo "ranger updated";
 }
 
 # Call all common update functions
@@ -142,6 +149,7 @@ common_update() {
     python_update
     tmux_update
     rmate_update
+    ranger_update
 }
 
 # Call device specific functions

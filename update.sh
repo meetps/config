@@ -26,8 +26,10 @@ case $1 in
         vscode_update ;;
     --rmate )
         rmate_update ;;
+    --ranger )
+        ranger_update ;;
     --terminator )
         terminator_update ;;
     *)
-    echo "Signal number $1 is not processed";;
+    echo "Update for module $1 is not supported";;
 esac
