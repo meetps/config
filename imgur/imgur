@@ -14,8 +14,8 @@ try:
     objresp = json.loads(resp.stdout)
 
     if objresp.get('success', False):
-        print objresp['data']['link']
+        print(objresp['data']['link'])
     else:
-        print 'Error: ', objresp['data']['error']
+        print('Error: ', objresp['data']['error'])
 except Exception as e:
-    print 'Error: ', e
+    print('Error: ', e)
