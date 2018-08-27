@@ -62,6 +62,7 @@ zsh_update() {
 }
 
 
+# Setup vim and Vundle
 vim_update() {
     # Make directory for bundles and colors
     mkdir ~/.vim/bundle
@@ -119,14 +120,17 @@ tmux_update() {
     echo "tmux updated";
 }
 
+# Setup terminator
 terminator_update() {
     # Copy config to terminator
     cp $CONFIGDIR/terminator/config ~/.config/terminator/config
     echo "terminator updated";
 }
 
+# Setup python modules
 python_update() {
     # Copy Ipython and Python configs
+    sudo python -m pip install sh neovim
     cp $CONFIGDIR/python/ipython_config ~/.ipython/ipython_config.py
     cp $CONFIGDIR/python/loadpy /usr/bin/loadpy
     cp $CONFIGDIR/python/jupyter_notebook_config.py ~/.jupyter/jupyter_notebook_config.py
