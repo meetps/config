@@ -1,0 +1,20 @@
+# Git aliases
+alias ga="git add"
+alias gc="git commit -m"
+alias gp="git push"
+
+# Utility
+alias naut="nautilus ."
+alias mp3='youtube-dl --extract-audio --audio-format mp3'
+alias jn='jupyter notebook'
+alias tatti="printf '\e[?2004l'"
+alias cgrep="grep -B 5 -A 5"
+alias compress-pdf="gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/screen -dNOPAUSE -dQUIET -dBATCH -sOutputFile=$2 $1"
+alias ranger="ranger -r ~/.config/ranger/"
+alias sq="squeue | grep meet"
+
+# VPN Aliases
+alias instiin="sudo systemctl start openvpn@iitbvpn.service"
+alias instiout="sudo systemctl stop openvpn@iitbvpn.service"
+
+# SSH Aliases (Copy from private file)

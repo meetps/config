@@ -58,6 +58,8 @@ zsh_update() {
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
     mv ~/.zshrc ~/.zshrc_old
     cp $CONFIGDIR/zsh/zshrc ~/.zshrc
+    cp $CONFIGDIR/zsh/transfer.sh ~/.transfer.sh
+    cp $CONFIGDIR/zsh/aliases ~/.zsh_aliases
     echo "zsh updated";
 }
 
