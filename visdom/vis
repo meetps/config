@@ -11,7 +11,7 @@ import numpy as np
 
 n_images = len(sys.argv) -1
 
-vis = visdom.Visdom(env='main', port=443)
+vis = visdom.Visdom(env='main', port=1297)
 
 if vis.check_connection():
     for i in sys.argv[1:]:
@@ -23,5 +23,5 @@ if vis.check_connection():
         vis.image(img, opts=dict(caption=i))
 
 else:
-    print "Please start server `python -m visdom.server --port 443`"
+    print "Please start server `visdom -port 1297`"
 

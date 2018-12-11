@@ -94,9 +94,9 @@ imgur_update() {
 
 # Setup visdom
 visdom_update() {
-    sudo python -m pip install "visdom==0.1.6.5"
-    sudo cp $CONFIGDIR/visdom/visdom /usr/bin/visdom
-    sudo chmod +x /usr/bin/visdom
+    sudo python -m pip install visdom
+    sudo cp $CONFIGDIR/visdom/vis /usr/bin/vis
+    sudo chmod +x /usr/bin/vis
     echo "visdom updated";
 }
 
