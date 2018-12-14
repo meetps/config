@@ -49,6 +49,8 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'bling/vim-airline'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'airblade/vim-gitgutter'
+Plugin 'ambv/black'
+Plugin 'nvie/vim-flake8'
 call vundle#end()            " required
 
 filetype plugin indent on    " required
