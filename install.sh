@@ -30,18 +30,18 @@ basic_update () {
 
 dependencies () {
     # Install Vim 8.0
-    sudo add-apt-repository ppa:jonathonf/vim
-    sudo apt update
-    sudo apt install -y vim
+    sudo add-apt-repository --force-yes ppa:jonathonf/vim
+    sudo apt update --force-yes
+    sudo apt install -y --no-install-recommends vim
 
     # Install misc stuff
-    sudo apt-get install -y ncdu tmux ranger w3m
+    sudo apt-get install -y --no-install-recommends ncdu tmux ranger w3m
     echo "Dependencies installed";
 }
 
 # Setup git
 git_update() {
-    cp $CONFIGDIR/git/gitconfig ~/.gitconfig
+    cp $CONFIGDIR/git/gitconfig $HOME/.gitconfig
     sudo cp $CONFIGDIR/git/redate /usr/bin/redate
     sudo chmod +x /usr/bin/redate
 
@@ -56,10 +56,10 @@ zsh_update() {
     sudo apt-get install -y zsh
     whoami | xargs -n 1 sudo chsh -s $(which zsh) $1
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-    mv ~/.zshrc ~/.zshrc_old
-    cp $CONFIGDIR/zsh/zshrc ~/.zshrc
-    cp $CONFIGDIR/zsh/transfer.sh ~/.transfer.sh
-    cp $CONFIGDIR/zsh/aliases ~/.zsh_aliases
+    mv $HOME/.zshrc $HOME/.zshrc_old
+    cp $CONFIGDIR/zsh/zshrc $HOME/.zshrc
+    cp $CONFIGDIR/zsh/transfer.sh $HOME/.transfer.sh
+    cp $CONFIGDIR/zsh/aliases $HOME/.zsh_aliases
     echo "zsh updated";
 }
 
@@ -67,19 +67,19 @@ zsh_update() {
 # Setup vim and Vundle
 vim_update() {
     # Make directory for bundles and colors
-    mkdir ~/.vim/bundle
-    mkdir ~/.vim/colors
+    mkdir -p $HOME/.vim/bundle
+    mkdir -p $HOME/.vim/colors
 
     # Copy color scheme
-    cp $CONFIGDIR/vim/monokai.vim ~/.vim/colors/
+    cp $CONFIGDIR/vim/monokai.vim $HOME/.vim/colors/
     
     # Vimcat binary
     sudo cp $CONFIGDIR/vim/vimcat /usr/bin/vimcat
     sudo chmod +x /usr/bin/vimcat
 
     # Clone and Install vundle
-    git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-    cp $CONFIGDIR/vim/vimrc ~/.vimrc
+    git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
+    cp $CONFIGDIR/vim/vimrc $HOME/.vimrc
     vim +PluginInstall! 
     echo "vim updated"; 
 
@@ -117,15 +117,15 @@ rmate_update() {
 # Setup tmux
 tmux_update() {
     cp tmux/tmux.conf $HOME/.tmux.conf
-    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-    tmux source-file ~/.tmux.conf
+    git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
+    tmux source-file $HOME/.tmux.conf
     echo "tmux updated";
 }
 
 # Setup terminator
 terminator_update() {
     # Copy config to terminator
-    cp $CONFIGDIR/terminator/config ~/.config/terminator/config
+    cp $CONFIGDIR/terminator/config $HOME/.config/terminator/config
     echo "terminator updated";
 }
 
@@ -133,16 +133,16 @@ terminator_update() {
 python_update() {
     # Copy Ipython and Python configs
     sudo python -m pip install sh neovim
-    cp $CONFIGDIR/python/ipython_config ~/.ipython/ipython_config.py
+    cp $CONFIGDIR/python/ipython_config $HOME/.ipython/ipython_config.py
     cp $CONFIGDIR/python/loadpy /usr/bin/loadpy
-    cp $CONFIGDIR/python/jupyter_notebook_config.py ~/.jupyter/jupyter_notebook_config.py
+    cp $CONFIGDIR/python/jupyter_notebook_config.py $HOME/.jupyter/jupyter_notebook_config.py
     sudo chmod +x /usr/bin/loadpy
     echo "python updated";
 }
 
 ranger_update() {
     # Copy Ipython and Python configs
-    cp $CONFIGDIR/ranger/* ~/.config/ranger/
+    cp $CONFIGDIR/ranger/* $HOME/.config/ranger/
     echo "ranger updated";
 }
 
@@ -150,6 +150,7 @@ ranger_update() {
 common_update() {
     basic_update
     dependencies
+    git_update
     imgur_update
     visdom_update
     python_update
