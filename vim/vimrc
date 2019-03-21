@@ -51,6 +51,7 @@ Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'nvie/vim-flake8'
 Plugin 'w0rp/ale'
+Plugin 'vim-scripts/comments.vim'
 call vundle#end()            " required
 
 filetype plugin indent on    " required
