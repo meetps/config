@@ -52,7 +52,7 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'nvie/vim-flake8'
 Plugin 'w0rp/ale'
 Plugin 'vim-scripts/comments.vim'
-Bundle 'christoomey/vim-tmux-navigator'
+Bundle 'blueyed/vim-diminactive'
 call vundle#end()            " required
 
 filetype plugin indent on    " required
