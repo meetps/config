@@ -52,6 +52,7 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'nvie/vim-flake8'
 Plugin 'w0rp/ale'
 Plugin 'vim-scripts/comments.vim'
+Bundle 'christoomey/vim-tmux-navigator'
 call vundle#end()            " required
 
 filetype plugin indent on    " required
@@ -68,6 +69,7 @@ let NERDTreeQuitOnOpen = 1
 
 " Airline
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#buffer_idx_mode = 1
 
 " YCM & Jedi - Padawan I always shall be
 let g:ycm_autoclose_preview_window_after_completion=1
