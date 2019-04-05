@@ -36,6 +36,7 @@ nnoremap <S-Left>  <C-W>>
 nnoremap <S-Up>    <C-W>+
 nnoremap <S-Down>  <C-W>-
 
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -53,6 +54,10 @@ Plugin 'nvie/vim-flake8'
 Plugin 'w0rp/ale'
 Plugin 'vim-scripts/comments.vim'
 Plugin 'blueyed/vim-diminactive'
+Plugin 'junegunn/goyo.vim'
+Plugin 'kien/ctrlp.vim'
+Plugin 'majutsushi/tagbar'
+Plugin 'easymotion/vim-easymotion'
 call vundle#end()            " required
 
 filetype plugin indent on    " required
@@ -76,6 +81,31 @@ let g:ycm_autoclose_preview_window_after_completion=1
 map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 let g:jedi#use_splits_not_buffers = "right"
 let g:deoplete#enable_at_startup = 1
+
+" Goyo
+let g:goyo_width = 140
+let g:goyo_width = 90
+let g:goyo_linenr = 1
+
+" Ctrl-P
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ }
+
+" Easymotion
+map  <Leader>f <Plug>(easymotion-bd-f)
+nmap <Leader>f <Plug>(easymotion-overwin-f)
+map <Leader>L <Plug>(easymotion-bd-jk)
+nmap <Leader>L <Plug>(easymotion-overwin-line)
+map  <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>w <Plug>(easymotion-overwin-w)
+
+" Misc
+map <leader>t :redraw!<CR>
+nmap <F8> :TagbarToggle<CR>
 
 " ColorScheme
 syntax enable
