@@ -1,0 +1,117 @@
+# i3status configuration file.
+# see "man i3status" for documentation.
+
+# It is important that this file is edited as UTF-8.
+# The following line should contain a sharp s:
+# ß
+# If the above line is not correctly displayed, fix your editor first!
+
+general {
+    colors = true
+    interval = 10
+}
+
+py3status {
+    nagbar_font = 'pango:Ubuntu Mono 36'
+
+}
+
+order += "volume_status"
+order += "static_string prev"
+order += "external_script spotify"
+order += "static_string next"
+order += "external_script net_name"
+order += "net_rate"
+order += "battery_level"
+order += "time"
+order += "group watch"
+
+# group showing disk space or times using button to change what is shown.
+group watch {
+    click_mode = "button"
+
+    frame time {
+        tztime SF {
+            format = "SFO %H:%M"
+            timezone = "America/Los_Angeles"
+        }
+
+        tztime ny {
+            format = "YYZ %H:%M"
+            timezone = "America/New_York"
+        }
+
+        tztime du {
+            format = "BOM %H:%M"
+            timezone = "Asia/Kolkata"
+        }
+    }
+}
+
+
+battery_level{
+    cache_timeout = 10
+	color_bad = "#FF0000"
+	color_charging = "#FCE94F"
+	color_degraded = "#ff7a00"
+	color_good = "#00FF00"
+
+	format_notify_charging = "charging"
+	format_notify_discharging = "discharging {percent}"
+	hide_when_full = False
+    hide_seconds = True
+	notification = True
+	notify_low_level = True
+	blocks = ""
+	charging_character = ""
+	format = " {percent} {icon} {time_remaining}"
+	color_charging = "#FFFFFF"
+}
+
+static_string prev {
+	format = "\?color=#4682BF "
+	on_click 1 = "exec --no-startup-id sp previous"
+}
+
+external_script spotify {
+    cache_timeout = 10
+    format = "\?color=#4682BF {output}"
+	script_path = "sp current | tail -n 1 | sed -e 's/^\w*\ *//'"
+}
+
+static_string next {
+	format = "\?color=#4682BF "
+	on_click 1 = "exec --no-startup-id sp next"
+}
+
+external_script net_name {
+    format = "{output}"
+    script_path = "iwgetid -r"
+}
+
+net_rate {
+	format = "  {total}"
+	precision = 0
+	format_no_connection = ""
+    cache_timeout = 5
+}
+
+time {
+	format = "   %A %e %B  %H:%M"
+	on_click 1 = "exec --no-startup-id gnome-calendar"
+}
+
+volume_status {
+    thresholds = [
+        (0, "#FF0000"),
+        (10, "#E2571E"),
+        (20, "#FF7F00"),
+        (30, "#FFFF00"),
+        (40, "#00FF00"),
+        (50, "#96BF33"),
+        (60, "#0000FF"),
+        (70, "#4B0082"),
+        (80, "#8B00FF"),
+        (90, "#FFFFFF")
+    ]
+}
