@@ -53,9 +53,21 @@ git_update() {
 
 # Setup zsh and oh-my-zsh
 zsh_update() {
+    # install zsh
     sudo apt-get install -y zsh
     whoami | xargs -n 1 sudo chsh -s $(which zsh) $1
+
+    # install oh-my-zsh and powerline9k with fonts
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+    git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
+    sudo apt-get install fonts-font-awesome
+    sudo mkdir -p /usr/share/fonts/truetype/fonts-iosveka/
+    sudo cp $CONFIGDIR/static/iosveka-regular.ttf /usr/share/fonts/truetype/fonts-iosveka/
+
+    # install zsh plugins
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+    git clone https://github.com/zsh-users/zsh-autosuggestions.git $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+
     mv $HOME/.zshrc $HOME/.zshrc_old
     cp $CONFIGDIR/zsh/zshrc $HOME/.zshrc
     cp $CONFIGDIR/zsh/transfer.sh $HOME/.transfer.sh
