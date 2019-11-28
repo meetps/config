@@ -151,7 +151,6 @@ bindsym $mod+d exec --no-startup-id "rofi -show run -theme lb -font \\"DejaVu 9\
 bindsym $mod+r mode "resize"
 bindsym $mod+x exec ~/.conkylock
 
-
 bar {
     status_command py3status -c ~/.config/i3/py3status_config
     font pango:Iosveka 12
@@ -162,5 +161,3 @@ bar {
 bindsym XF86AudioRaiseVolume  exec "amixer -q sset Master 5%+ unmute; py3-cmd refresh volume_stktus"
 bindsym XF86AudioLowerVolume  exec "amixer -q sset Master 5%- unmute; py3-cmd refresh volume_status"
 bindsym XF86AudioMute         exec "amixer -q sset Master toggle; py3-cmd refresh volume_status"
-
-exec --no-startup-id $HOME/scripts/i3-battery-popup

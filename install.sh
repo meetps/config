@@ -2,12 +2,12 @@
 #
 #          Personal Environment Config
 #            
-#                    .--.
-#          ::\`--._,'.::.`._.--'/::::
-#          ::::.  ` __::__ '  .::::::
-#          ::::::-:.`'..`'.:-::::::::
-#          ::::::::\ `--' /::::::::::
-#                    '--'
+#                     .--.
+#           ::\`--._,'.::.`._.--'/::
+#           ::::.  ` __::__ '  .::::
+#           ::::::-:.`'..`'.:-::::::
+#           ::::::::\ `--' /::::::::
+#                     '--'
 #
 #                  Try not.
 #         Do or do not. There is no try.
@@ -30,12 +30,12 @@ basic_update () {
 
 dependencies () {
     # Install Vim 8.0
-    sudo add-apt-repository --force-yes ppa:jonathonf/vim
+    sudo add-apt-repository --yes --force-yes ppa:jonathonf/vim
     sudo apt update --force-yes
     sudo apt install -y --no-install-recommends vim
 
     # Install misc stuff
-    sudo apt-get install -y --no-install-recommends ncdu tmux ranger w3m
+    sudo apt-get install -y --no-install-recommends ncdu tmux ranger w3m curl htop
     echo "Dependencies installed";
 }
 
@@ -89,10 +89,12 @@ vim_update() {
     sudo cp $CONFIGDIR/vim/vimcat /usr/bin/vimcat
     sudo chmod +x /usr/bin/vimcat
 
-    # Clone and Install vundle
-    git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
+    # Clone and Install vim-plug
+    curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
     cp $CONFIGDIR/vim/vimrc $HOME/.vimrc
-    vim +PluginInstall! 
+    vim +silent +VimEnter +PluginInstall +qall
     echo "vim updated"; 
 
 }
@@ -128,6 +130,7 @@ rmate_update() {
 
 # Setup tmux
 tmux_update() {
+    mkdir -p $HOME/.tmux/
     cp tmux/tmux.conf $HOME/.tmux.conf
     git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
     tmux source-file $HOME/.tmux.conf
@@ -141,9 +144,21 @@ terminator_update() {
     echo "terminator updated";
 }
 
+# Setup urxvt
+urxvt_update() {
+    sudo apt-get install -y --no-install-recommends rxvt-unicode
+    mkdir -p $HOME/.urxvt/ext/
+    cp -r $CONFIGDIR/urxvt/ext $HOME/.urxvt/
+    cp -r $CONFIGDIR/urxvt/Xdefaults $HOME/.Xdefaults
+    xrdb $HOME/.Xdefaults
+    echo "urxvt updated";
+}
+
 # Setup python modules
 python_update() {
     # Copy Ipython and Python configs
+    mkdir -p $HOME/.ipython/
+    mkdir -p $HOME/.jupyter/
     sudo python -m pip install sh neovim
     cp $CONFIGDIR/python/ipython_config $HOME/.ipython/ipython_config.py
     cp $CONFIGDIR/python/loadpy /usr/bin/loadpy
@@ -154,8 +169,18 @@ python_update() {
 
 ranger_update() {
     # Copy Ipython and Python configs
+    mkdir -p $HOME/.config/ranger
     cp $CONFIGDIR/ranger/* $HOME/.config/ranger/
     echo "ranger updated";
+}
+
+i3_update() {
+    sudo add-apt-repository --force-yes ppa:jasonpleau/rofi
+    sudo apt update --force-yes
+    sudo apt-get install -y --no-install-recommends py3status i3 i3lock rofi
+    mkdir -p $HOME/.config/i3
+    cp $CONFIGDIR/i3/*confg $HOME/.config/i3/
+    echo "i3 updated";
 }
 
 # Call all common update functions
@@ -169,6 +194,7 @@ common_update() {
     tmux_update
     rmate_update
     ranger_update
+    urxvt_update
 }
 
 # Call device specific functions
@@ -182,6 +208,7 @@ elif [ "$1" = "laptop" ] ; then
     terminator_update
     vscode_update
     vim_update
+    i3_update
 else
     echo "Only laptop and server supported, $1 not supported"
 fi
