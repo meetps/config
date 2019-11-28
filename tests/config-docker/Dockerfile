@@ -18,7 +18,7 @@ RUN apt-get install -y --no-install-recommends \
     ca-certificates \
     software-properties-common \
     python-pip \
-    rxvt-unicode 
+    rxvt-unicode
 
 RUN pip install setuptools wheel
 
