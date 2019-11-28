@@ -30,6 +30,10 @@ case $1 in
         ranger_update ;;
     --terminator )
         terminator_update ;;
+    --i3 )
+        i3_update ;;
+    --urxvt )
+        urxvt_update ;;
     *)
     echo "Update for module $1 is not supported";;
 esac

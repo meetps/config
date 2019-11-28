@@ -1,0 +1,106 @@
+!-------------------------------------------------------------------------------
+! Xft settings
+!-------------------------------------------------------------------------------
+
+Xft.dpi:                    96
+Xft.antialias:              false
+Xft.rgba:                   rgb
+Xft.hinting:                true
+Xft.hintstyle:              hintslight
+
+
+URxvt.termName:             rxvt-256color
+URxvt.depth:                32
+URxvt.geometry:             90x30
+URxvt.transparent:          false
+URxvt.fading:               0
+URxvt.loginShell:           true
+URxvt.saveLines:            50
+URxvt.internalBorder:       3
+URxvt.lineSpace:            0
+
+*.font: xft:Iosevka:style=Regular:size=14
+*.boldFont: xft:Iosevka:style=Bold:size=14
+*.italicFont: xft:Iosevka:style=Italic:size=14
+*.boldItalicFont: xft:Iosevka:style=Bold Italic:size=14
+
+! Fix font space
+URxvt*letterSpace: -1
+
+! Scrollbar
+URxvt.scrollStyle:          rxvt
+URxvt.scrollBar:            false
+
+! Perl extensions
+URxvt.matcher.button:       1
+URxvt.urlLauncher:          google-chrome-stable
+
+! Cursor
+URxvt.cursorBlink:          true
+URxvt.cursorColor:          #657b83
+URxvt.cursorUnderline:      false
+
+! Pointer
+URxvt.pointerBlank:         true
+
+! special
+*.foreground:   #a5a2a2
+*.background:   #090300
+*.cursorColor:  #a5a2a2
+
+! black
+*.color0:       #090300
+*.color8:       #5c5855
+
+! red
+*.color1:       #db2d20
+*.color9:       #db2d20
+
+! green
+*.color2:       #01a252
+*.color10:      #01a252
+
+! yellow
+*.color3:       #fded02
+*.color11:      #fded02
+
+! blue
+*.color4:       #01a0e4
+*.color12:      #01a0e4
+
+! magenta
+*.color5:       #a16a94
+*.color13:      #a16a94
+
+! cyan
+*.color6:       #b5e4f4
+*.color14:      #b5e4f4
+
+! white
+*.color7:       #a5a2a2
+*.color15:      #f7f7f7
+
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+
+!! Copy Paste & Other Extensions
+URxvt.perl-ext-common: default,clipboard,url-select,keyboard-select
+URxvt.copyCommand: xclip -i -selection clipboard
+URxvt.pasteCommand: xclip -o -selection clipboard
+URxvt.keysym.Shift-Control-V: perl:clipboard:paste
+URxvt.keysym.Shift-Control-C: perl:clipboard:copy
+URxvt.keysym.M-c: perl:clipboard:copy
+URxvt.keysym.M-v: perl:clipboard:paste
+URxvt.keysym.M-C-v: perl:clipboard:paste_escaped
+URxvt.keysym.M-Escape: perl:keyboard-select:activate
+URxvt.keysym.M-s: perl:keyboard-select:search
+URxvt.keysym.M-u: perl:url-select:select_next
+URxvt.underlineURLs: true
+URxvt.urlButton: 1
+URxvt.keysym.Control-Meta-c: builtin-string:
+URxvt.keysym.Control-Meta-v: builtin-string:
+
+URxvt.keysym.C-minus:     resize-font:smaller
+URxvt.keysym.C-plus:      resize-font:bigger
+URxvt.keysym.C-equal:     resize-font:reset
+URxvt.keysym.C-question:  resize-font:show
