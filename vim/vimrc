@@ -38,27 +38,26 @@ nnoremap <S-Up>    <C-W>+
 nnoremap <S-Down>  <C-W>-
 
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'davidhalter/jedi-vim'
-Plugin 'shougo/deoplete.nvim'
-Plugin 'roxma/nvim-yarp'
-Plugin 'roxma/vim-hug-neovim-rpc'
-Plugin 'scrooloose/nerdtree'
-Plugin 'bling/vim-airline'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'nvie/vim-flake8'
-Plugin 'w0rp/ale'
-Plugin 'vim-scripts/comments.vim'
-Plugin 'blueyed/vim-diminactive'
-Plugin 'junegunn/goyo.vim'
-Plugin 'kien/ctrlp.vim'
-Plugin 'majutsushi/tagbar'
-Plugin 'easymotion/vim-easymotion'
-call vundle#end()            " required
+call plug#begin()
+Plug 'VundleVim/Vundle.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'davidhalter/jedi-vim'
+Plug 'shougo/deoplete.nvim'
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
+Plug 'scrooloose/nerdtree'
+Plug 'bling/vim-airline'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'airblade/vim-gitgutter'
+Plug 'nvie/vim-flake8'
+Plug 'w0rp/ale'
+Plug 'vim-scripts/comments.vim'
+Plug 'blueyed/vim-diminactive'
+Plug 'junegunn/goyo.vim'
+Plug 'kien/ctrlp.vim'
+Plug 'majutsushi/tagbar'
+Plug 'easymotion/vim-easymotion'
+call plug#end()            " required
 
 filetype plugin indent on    " required
 

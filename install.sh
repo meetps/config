@@ -1,7 +1,7 @@
 #####################################################
 #
 #          Personal Environment Config
-#            
+#
 #                     .--.
 #           ::\`--._,'.::.`._.--'/::
 #           ::::.  ` __::__ '  .::::
@@ -84,7 +84,7 @@ vim_update() {
 
     # Copy color scheme
     cp $CONFIGDIR/vim/monokai.vim $HOME/.vim/colors/
-    
+
     # Vimcat binary
     sudo cp $CONFIGDIR/vim/vimcat /usr/bin/vimcat
     sudo chmod +x /usr/bin/vimcat
@@ -94,12 +94,12 @@ vim_update() {
         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
     cp $CONFIGDIR/vim/vimrc $HOME/.vimrc
-    vim +silent +VimEnter +PluginInstall +qall
-    echo "vim updated"; 
+    vim +silent +VimEnter +PlugInstall +qall
+    echo "vim updated";
 
 }
 
-# Setup imgur 
+# Setup imgur
 imgur_update() {
     sudo cp $CONFIGDIR/imgur/imgur /usr/bin/imgur
     sudo chmod +x /usr/bin/imgur
