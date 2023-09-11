@@ -25,7 +25,7 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 api.nvim_command [[filetype on]]
-api.nvim_command [[set colorcolumn=80]]
+api.nvim_command [[set colorcolumn=88]]
 api.nvim_command [[highlight colorcolumn ctermbg=DarkBlue]]
 
 api.nvim_command [[nnoremap <C-J> <C-W><C-J>]]
@@ -108,7 +108,15 @@ require("bufferline").setup{
     middle_mouse_command = 'vsp %d'
   }
 }
-require("nvim-tree").setup()
+require("nvim-tree").setup({
+    filters = {
+        dotfiles = false,
+        git_clean = false,
+        no_buffer = false,
+        custom = { '.ruff_cache', '.git' },
+    },
+})
+
 require("lsp") -- CiderLSP
 require("diagnostics") -- Diagnostics
 require('lualine').setup {
@@ -152,3 +160,4 @@ require('lualine').setup {
   inactive_winbar = {},
   extensions = {}
 }
+
