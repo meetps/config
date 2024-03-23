@@ -1,6 +1,6 @@
 #!/bin/bash
 
-URL=https://github.com/meetshah1995/config.git
+URL=https://github.com/meetps/config.git
 
 local_test () {
     docker build config-docker -t config:latest
