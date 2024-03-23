@@ -1,8 +1,0 @@
-{
-    "python.disablePromptForFeatures": [
-        "pylint"
-    ],
-    "workbench.startupEditor": "newUntitledFile",
-    "workbench.editor.enablePreviewFromQuickOpen": false,
-    "workbench.editor.enablePreview": false
-}

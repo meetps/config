@@ -41,35 +41,41 @@ api.nvim_command [[nnoremap <S-Left>  <C-W>>]]
 api.nvim_command [[nnoremap <S-Up>    <C-W>+]]
 api.nvim_command [[nnoremap <S-Down>  <C-W>-]]
 
-require('packer').startup(function()
-  use 'wbthomason/packer.nvim' -- Package manager
-end)
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
 
-require("packer").startup(function(use)
-  use({'wbthomason/packer.nvim'})
-  use({"nvim-telescope/telescope.nvim", tag = "0.1.1", requires = {{'nvim-lua/plenary.nvim'}}})
-  use("ojroques/nvim-osc52")
-  use("nvim-lua/plenary.nvim")
-  use("nvim-tree/nvim-tree.lua")
-  -- CiderLSP
-  use("hrsh7th/cmp-buffer")
-  use("hrsh7th/cmp-nvim-lsp")
-  use("hrsh7th/cmp-nvim-lua")
-  use("hrsh7th/cmp-path")
-  use("hrsh7th/cmp-vsnip")
-  use("hrsh7th/nvim-cmp")
-  use("hrsh7th/vim-vsnip")
-  use("neovim/nvim-lspconfig")
-  use("onsails/lspkind.nvim")
-  use("easymotion/vim-easymotion")
-  -- Diagnostics
-  use("nvim-lualine/lualine.nvim")
-  use("nvim-tree/nvim-web-devicons")
-  use("blueyed/vim-diminactive")
-  use("junegunn/goyo.vim")
-  use {'akinsho/bufferline.nvim', tag = "v3.*", requires = 'nvim-tree/nvim-web-devicons'}
-  use({ "folke/trouble.nvim", requires = "kyazdani42/nvim-web-devicons"})
-end)
+require("lazy").setup({
+  { "nvim-telescope/telescope.nvim", tag = "0.1.1", requires = { 'nvim-lua/plenary.nvim' } },
+  "ojroques/nvim-osc52",
+  "nvim-lua/plenary.nvim",
+  "nvim-tree/nvim-tree.lua",
+  { "hrsh7th/cmp-buffer", lazy = true },
+  { "hrsh7th/cmp-nvim-lsp", lazy = true },
+  { "hrsh7th/cmp-nvim-lua", lazy = true },
+  { "hrsh7th/cmp-path", lazy = true },
+  { "hrsh7th/cmp-vsnip", lazy = true },
+  { "hrsh7th/nvim-cmp", lazy = true },
+  { "hrsh7th/vim-vsnip", lazy = true },
+  "neovim/nvim-lspconfig",
+  "onsails/lspkind.nvim",
+  "easymotion/vim-easymotion",
+  "nvim-lualine/lualine.nvim",
+  "nvim-tree/nvim-web-devicons",
+  "blueyed/vim-diminactive",
+  "junegunn/goyo.vim",
+  { "akinsho/bufferline.nvim", tag = "v3.7.0", requires = 'nvim-tree/nvim-web-devicons' },
+  { "folke/trouble.nvim", requires = "kyazdani42/nvim-web-devicons" }
+})
 
 local function get_current_workspace()
   return string.gsub(vim.api.nvim_buf_get_name(0), vim.loop.cwd(), '')
