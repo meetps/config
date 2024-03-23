@@ -55,12 +55,15 @@ zsh_update() {
     sudo apt install -y zsh fonts-font-awesome fzf
     whoami | xargs -n 1 sudo chsh -s $(which zsh) $1
 
+
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
     git clone https://github.com/zsh-users/zsh-autosuggestions.git $HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions
 
     mv $HOME/.zshrc $HOME/.zshrc_old
     cp $CONFIGDIR/zsh/zshrc $HOME/.zshrc && cp $CONFIGDIR/zsh/aliases $HOME/.zsh_aliases
+    cp $CONFIGDIR/zsh/p10k.zsh $HOME/.p10k.zsh
 
     sudo mkdir -p /usr/share/fonts/truetype/fonts-iosveka/
     sudo cp $CONFIGDIR/static/iosveka-regular.ttf /usr/share/fonts/truetype/fonts-iosveka/
