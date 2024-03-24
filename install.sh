@@ -14,7 +14,6 @@
 #####################################################
 
 
-BRANCH=master
 URL=https://github.com/ms-google/config.git
 CONFIGDIR=$HOME/.mconfig
 
@@ -22,7 +21,17 @@ basic_update () {
     sudo apt install -y --no-install-recommends git unzip wget
     if [ ! -d "$CONFIGDIR" ] ; then
         echo "Config repo doesn't exist at $CONFIGDIR, cloning";
-        git clone "$URL" "$CONFIGDIR";
+
+        repo_url="https://github.com/meetps/config/archive/master.zip"
+        dest_dir="$HOME/.mconfig"
+        mkdir -p "$dest_dir"
+        temp_zip="$(mktemp).zip"
+        curl -sL "$repo_url" -o "$temp_zip"
+        unzip -qo "$temp_zip" -d "$dest_dir"
+        rm "$temp_zip"
+
+
+        # git clone "$URL" "$CONFIGDIR";
     else
         echo "Config repo exists at $CONFIGDIR, checking for updates";
         cd "$CONFIGDIR";
