@@ -68,22 +68,6 @@ battery_level{
 	color_charging = "#FFFFFF"
 }
 
-static_string prev {
-	format = "\?color=#4682BF "
-	on_click 1 = "exec --no-startup-id sp previous"
-}
-
-external_script spotify {
-    cache_timeout = 10
-    format = "\?color=#4682BF {output}"
-	script_path = "sp current | tail -n 1 | sed -e 's/^\w*\ *//'"
-}
-
-static_string next {
-	format = "\?color=#4682BF "
-	on_click 1 = "exec --no-startup-id sp next"
-}
-
 external_script net_name {
     format = "{output}"
     script_path = "iwgetid -r"
@@ -100,6 +84,13 @@ time {
 	format = "   %A %e %B  %H:%M"
 	on_click 1 = "exec --no-startup-id gnome-calendar"
 }
+
+external_script chogadiya {
+    format = "{output}"
+    script_path = "python /usr/bin/chogadiya.py"
+    cache_timeout = 1200
+}
+
 
 volume_status {
     thresholds = [
