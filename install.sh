@@ -15,7 +15,7 @@
 
 
 BRANCH=master
-URL=https://github.com/ms-google/config/archive/refs/heads/${BRANCH}.zip
+URL=https://github.com/ms-google/config.git
 CONFIGDIR=$HOME/.mconfig
 
 basic_update () {
