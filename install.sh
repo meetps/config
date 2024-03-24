@@ -29,6 +29,11 @@ basic_update () {
         curl -sL "$repo_url" -o "$temp_zip"
         unzip -qo "$temp_zip" -d "$dest_dir"
         rm "$temp_zip"
+        extracted_dir="$dest_dir/config-master"
+        if [ -d "$extracted_dir" ]; then
+            mv "$extracted_dir"/* "$dest_dir"
+            rm -r "$extracted_dir"
+        fi
 
 
         # git clone "$URL" "$CONFIGDIR";
