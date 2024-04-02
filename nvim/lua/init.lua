@@ -104,7 +104,9 @@ vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
 
-require("telescope").setup()
+require("telescope").setup({
+  view = { adaptive_size = true }
+})
 require("nvim-web-devicons").setup()
 require("bufferline").setup{
   options = {
