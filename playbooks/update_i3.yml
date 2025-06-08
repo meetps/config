@@ -1,0 +1,7 @@
+---
+- name: Update i3 configuration
+  hosts: localhost
+  connection: local
+  roles:
+    - role: basic_setup # Ensure .mconfig is up-to-date
+    - role: i3

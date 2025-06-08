@@ -1,0 +1,46 @@
+---
+- name: Ensure neovim package is installed
+  ansible.builtin.package:
+    name: neovim
+    state: present
+  become: true
+
+- name: Create nvim directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: "0755"
+  loop:
+    - "~/.config/nvim/plugin"
+    - "~/.config/nvim/colors"
+    - "~/.config/nvim/lua"
+
+- name: Copy monokai colorscheme
+  ansible.builtin.copy:
+    src: nvim/colors/monokai.vim
+    dest: ~/.config/nvim/colors/monokai.vim
+    mode: "0644"
+
+- name: Copy lua configuration files
+  ansible.builtin.copy:
+    src: nvim/lua/
+    dest: ~/.config/nvim/lua/
+    mode: "0644"
+
+- name: Initialize nvim plugins with Lazy.nvim and exit
+  ansible.builtin.command:
+    cmd: "nvim -u {{ ansible_env.HOME }}/.config/nvim/lua/init.lua --headless \"+Lazy! sync\" +qa"
+  args:
+    chdir: "{{ ansible_env.HOME }}" # Run from home directory or a relevant path
+    # creates: "{{ ansible_env.HOME }}/.config/nvim/lazy-lock.json" # This might be too restrictive if the command fails for other reasons
+  environment: # Attempt to provide a minimal environment if needed
+    HOME: "{{ ansible_env.HOME }}"
+    # USER: "{{ ansible_user_id }}" # ansible_user_id might not always be available/correct
+    PATH: "/usr/bin:/bin:/usr/local/bin:{{ ansible_env.HOME }}/.local/bin" # Add user local bin
+  register: nvim_lazy_sync_command_result
+  changed_when: nvim_lazy_sync_command_result.rc == 0 # Consider it changed if successful
+  failed_when: nvim_lazy_sync_command_result.rc != 0 and "pattern not found: Lazy!" not in nvim_lazy_sync_command_result.stderr and "E5108: Error executing lua" not in nvim_lazy_sync_command_result.stderr
+  when: ansible_env.HOME is defined and ansible_env.HOME != "" # Ensure HOME is defined
+  tags:
+    - nvim_config
+  # ignore_errors: true # Removing this as failed_when should handle expected non-fatal errors

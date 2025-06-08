@@ -25,7 +25,8 @@ def create_parser():
     # Update command
     update_parser = subparsers.add_parser("update", help="Update system components.")
     update_parser.add_argument("--component", type=str,
-                               help="Component to update (e.g., vim, tmux, zsh).")
+                               choices=["zsh", "tmux", "nvim", "urxvt", "i3"], # Added new components
+                               help="Component to update (e.g., vim, tmux, zsh, nvim, urxvt, i3).")
     return parser
 
 def main():
@@ -40,35 +41,34 @@ def main():
         if args.type == "server":
             playbook_to_run = 'playbooks/install_server.yml'
         elif args.type == "laptop":
-            # Placeholder for laptop install playbook
-            # playbook_to_run = 'playbooks/install_laptop.yml'
-            print(f"Laptop installation not yet fully implemented. Running basic setup.")
-            playbook_to_run = 'playbooks/basic_setup.yml'
-        else:
-            print(f"Unknown install type: {args.type}. Running basic setup.")
-            playbook_to_run = 'playbooks/basic_setup.yml'
+            playbook_to_run = 'playbooks/install_laptop.yml' # Updated for laptop
+        # No else needed here due to choices in argparse for --type
 
     elif args.command == "update":
         if args.component == "zsh":
             playbook_to_run = 'playbooks/update_zsh.yml'
         elif args.component == "tmux":
             playbook_to_run = 'playbooks/update_tmux.yml'
-        elif args.component:
-            # Placeholder for other component updates
-            # For example, could map components to specific update playbooks
-            # if args.component == "vim":
-            # playbook_to_run = 'playbooks/update_vim.yml'
-            print(f"Update for component '{args.component}' not yet specifically implemented. Running basic setup.")
+        elif args.component == "nvim": # Added nvim
+            playbook_to_run = 'playbooks/update_nvim.yml'
+        elif args.component == "urxvt": # Added urxvt
+            playbook_to_run = 'playbooks/update_urxvt.yml'
+        elif args.component == "i3": # Added i3
+            playbook_to_run = 'playbooks/update_i3.yml'
+        elif args.component: # This case might not be reachable if choices are strict
+            print(f"Update for component '{args.component}' not specifically implemented. Running basic setup.")
             playbook_to_run = 'playbooks/basic_setup.yml'
-        else:
-            # Generic update if no component is specified, could be a general update playbook
-            print("No specific component specified for update. Running basic setup.")
+        else: # If --component is not provided at all
+            print("No specific component specified for update. Running basic setup for now.")
+            # Potentially, this could run a general "update all installed components" playbook in the future.
             playbook_to_run = 'playbooks/basic_setup.yml'
+
 
     if playbook_to_run:
         run_playbook(playbook_to_run)
     else:
-        print("No playbook determined for the given arguments.")
+        # This condition should ideally not be met if arguments are handled correctly
+        print("No playbook determined for the given arguments. This might indicate an issue.")
 
 if __name__ == "__main__":
     main()

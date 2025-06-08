@@ -1,0 +1,57 @@
+---
+- name: Test urxvt role
+  hosts: localhost
+  connection: local
+  gather_facts: yes
+
+  pre_tasks:
+    - name: Ensure .mconfig directory exists (simulating basic_setup)
+      ansible.builtin.file:
+        path: "{{ ansible_env.HOME }}/.mconfig"
+        state: directory
+        mode: '0755'
+    - name: Ensure urxvt config directories exist in .mconfig (simulating basic_setup)
+      ansible.builtin.file:
+        path: "{{ ansible_env.HOME }}/.mconfig/urxvt/{{ item }}"
+        state: directory
+        mode: '0755'
+      loop:
+        - ext
+    - name: Create dummy urxvt config files in .mconfig (simulating basic_setup)
+      ansible.builtin.copy:
+        content: "-- test urxvt file"
+        dest: "{{ ansible_env.HOME }}/.mconfig/urxvt/{{ item }}"
+      loop:
+        - Xdefaults
+        - ext/clipboard
+        - ext/keyboard-select
+        # Add other ext files if they are vital for the role's logic
+
+  roles:
+    - role: urxvt
+
+  post_tasks:
+    - name: Verify urxvt config directory exists
+      ansible.builtin.stat:
+        path: "{{ ansible_env.HOME }}/.urxvt/ext"
+      register: urxvt_ext_dir
+      failed_when: not urxvt_ext_dir.stat.exists or not urxvt_ext_dir.stat.isdir
+
+    - name: Verify urxvt config files exist
+      ansible.builtin.stat:
+        path: "{{ ansible_env.HOME }}/{{ item }}"
+      register: urxvt_config_files
+      loop:
+        - .Xdefaults
+        - .urxvt/ext/clipboard
+        - .urxvt/ext/keyboard-select
+      failed_when: not item.stat.exists or not item.stat.isreg
+      loop_control:
+        label: "{{ item.item }}"
+
+    # Verifying xrdb is tricky without a display.
+    # We'll rely on the role's successful execution for now.
+    - name: Check xrdb command execution status (from role task)
+      ansible.builtin.debug:
+        msg: "xrdb command execution status: {{ xrdb_load_xdefaults_result }}" # Assuming this is registered in the role
+      when: xrdb_load_xdefaults_result is defined

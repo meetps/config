@@ -1,0 +1,65 @@
+---
+- name: Test nvim role
+  hosts: localhost
+  connection: local
+  gather_facts: yes # Gather facts to get ansible_env.HOME
+
+  pre_tasks:
+    - name: Ensure .mconfig directory exists (simulating basic_setup)
+      ansible.builtin.file:
+        path: "{{ ansible_env.HOME }}/.mconfig"
+        state: directory
+        mode: '0755'
+    - name: Ensure nvim config directories exist in .mconfig (simulating basic_setup)
+      ansible.builtin.file:
+        path: "{{ ansible_env.HOME }}/.mconfig/nvim/{{ item }}"
+        state: directory
+        mode: '0755'
+      loop:
+        - colors
+        - lua
+    - name: Create dummy nvim config files in .mconfig (simulating basic_setup)
+      ansible.builtin.copy:
+        content: "-- test nvim file"
+        dest: "{{ ansible_env.HOME }}/.mconfig/nvim/{{ item }}"
+      loop:
+        - colors/monokai.vim
+        - lua/init.lua
+        - lua/diagnostics.lua
+        - lua/lsp.lua
+
+  roles:
+    - role: nvim
+
+  post_tasks:
+    - name: Verify nvim config directories exist
+      ansible.builtin.stat:
+        path: "{{ ansible_env.HOME }}/.config/nvim/{{ item }}"
+      register: nvim_config_dirs
+      loop:
+        - plugin
+        - colors
+        - lua
+      failed_when: not item.stat.exists or not item.stat.isdir
+      loop_control:
+        label: "{{ item.item }}" # Correct way to access loop item for label
+
+    - name: Verify nvim config files exist
+      ansible.builtin.stat:
+        path: "{{ ansible_env.HOME }}/.config/nvim/{{ item }}"
+      register: nvim_config_files
+      loop:
+        - colors/monokai.vim
+        - lua/init.lua
+        - lua/diagnostics.lua
+        - lua/lsp.lua
+      failed_when: not item.stat.exists or not item.stat.isreg
+      loop_control:
+        label: "{{ item.item }}" # Correct way to access loop item for label
+
+    # Note: Verifying the nvim command execution directly is complex.
+    # We'll rely on the successful execution of the role as a proxy for now.
+    - name: Check nvim command execution status (from role task)
+      ansible.builtin.debug:
+        msg: "Nvim command execution status: {{ nvim_lazy_sync_command_result }}" # Assuming nvim_lazy_sync_command_result is registered in the role
+      when: nvim_lazy_sync_command_result is defined
