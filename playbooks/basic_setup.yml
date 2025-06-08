@@ -1,0 +1,8 @@
+---
+- name: Basic setup
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Include basic_setup role
+      ansible.builtin.include_role:
+        name: basic_setup

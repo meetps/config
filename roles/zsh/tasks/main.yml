@@ -1,0 +1,134 @@
+---
+- name: Install Zsh and related packages
+  become: true
+  ansible.builtin.apt:
+    name:
+      - zsh
+      - fonts-font-awesome
+      - fzf
+    state: present
+    update_cache: true
+  tags:
+    - zsh_packages
+
+- name: Change user's shell to zsh
+  become: true
+  ansible.builtin.user:
+    name: "{{ ansible_user_id }}" # Or lookup('env', 'USER') if not localhost
+    shell: /usr/bin/zsh
+  tags:
+    - zsh_shell
+
+- name: Check if Oh My Zsh is installed
+  ansible.builtin.stat:
+    path: "{{ ansible_env.HOME }}/.oh-my-zsh"
+  register: oh_my_zsh_stat
+  tags:
+    - zsh_omz
+
+- name: Clone Oh My Zsh
+  ansible.builtin.git:
+    repo: 'https://github.com/ohmyzsh/ohmyzsh.git'
+    dest: "{{ ansible_env.HOME }}/.oh-my-zsh"
+    depth: 1
+    accept_hostkey: true # Add if needed for ssh keys, not for https
+  when: not oh_my_zsh_stat.stat.exists
+  tags:
+    - zsh_omz
+
+- name: Check if powerlevel10k is installed
+  ansible.builtin.stat:
+    path: "{{ ansible_env.HOME }}/powerlevel10k"
+  register: p10k_stat
+  tags:
+    - zsh_p10k
+
+- name: Clone powerlevel10k
+  ansible.builtin.git:
+    repo: 'https://github.com/romkatv/powerlevel10k.git'
+    dest: "{{ ansible_env.HOME }}/powerlevel10k"
+    depth: 1
+  when: not p10k_stat.stat.exists
+  tags:
+    - zsh_p10k
+
+- name: Zsh plugins destination directory
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.oh-my-zsh/custom/plugins"
+    state: directory
+  tags:
+    - zsh_plugins
+
+- name: Clone zsh-syntax-highlighting
+  ansible.builtin.git:
+    repo: 'https://github.com/zsh-users/zsh-syntax-highlighting.git'
+    dest: "{{ ansible_env.HOME }}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
+    depth: 1
+  tags:
+    - zsh_plugins
+
+- name: Clone zsh-autosuggestions
+  ansible.builtin.git:
+    repo: 'https://github.com/zsh-users/zsh-autosuggestions.git'
+    dest: "{{ ansible_env.HOME }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+    depth: 1
+  tags:
+    - zsh_plugins
+
+- name: Check if .zshrc exists
+  ansible.builtin.stat:
+    path: "{{ ansible_env.HOME }}/.zshrc"
+  register: zshrc_stat
+  tags:
+    - zsh_config
+
+- name: Backup existing .zshrc
+  ansible.builtin.command: # Using command for simple mv
+    cmd: "mv {{ ansible_env.HOME }}/.zshrc {{ ansible_env.HOME }}/.zshrc_old_{{ ansible_date_time.iso8601_basic_short }}"
+  when: zshrc_stat.stat.exists
+  changed_when: false # This command always changes state if it runs
+  tags:
+    - zsh_config
+
+- name: Copy .zshrc configuration file
+  ansible.builtin.copy:
+    src: "{{ ansible_env.HOME }}/.mconfig/zsh/zshrc"
+    dest: "{{ ansible_env.HOME }}/.zshrc"
+    remote_src: true
+  tags:
+    - zsh_config
+
+- name: Copy .zsh_aliases configuration file
+  ansible.builtin.copy:
+    src: "{{ ansible_env.HOME }}/.mconfig/zsh/aliases"
+    dest: "{{ ansible_env.HOME }}/.zsh_aliases"
+    remote_src: true
+  tags:
+    - zsh_config
+
+- name: Copy .p10k.zsh configuration file
+  ansible.builtin.copy:
+    src: "{{ ansible_env.HOME }}/.mconfig/zsh/p10k.zsh"
+    dest: "{{ ansible_env.HOME }}/.p10k.zsh"
+    remote_src: true
+  tags:
+    - zsh_config
+
+- name: Create directory for Iosevka font
+  become: true
+  ansible.builtin.file:
+    path: "/usr/share/fonts/truetype/fonts-iosevka"
+    state: directory
+    mode: '0755'
+  tags:
+    - zsh_font
+
+- name: Copy Iosevka font
+  become: true
+  ansible.builtin.copy:
+    src: "{{ ansible_env.HOME }}/.mconfig/static/iosevka-regular.ttf"
+    dest: "/usr/share/fonts/truetype/fonts-iosevka/iosevka-regular.ttf"
+    remote_src: true
+  tags:
+    - zsh_font
+  notify: Update font cache # Handler to update font cache

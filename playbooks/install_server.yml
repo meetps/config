@@ -1,0 +1,10 @@
+---
+- name: Install server configuration
+  hosts: localhost
+  connection: local
+  roles:
+    - role: basic_setup
+    - role: common_system
+    - role: common_config
+    - role: zsh
+    - role: tmux

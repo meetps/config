@@ -1,0 +1,55 @@
+---
+- name: Ensure .tmux directory exists
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.tmux"
+    state: directory
+    mode: '0755'
+  tags:
+    - tmux_config
+
+- name: Copy tmux.conf
+  ansible.builtin.copy:
+    src: "{{ ansible_env.HOME }}/.mconfig/tmux/tmux.conf"
+    dest: "{{ ansible_env.HOME }}/.tmux.conf" # Original script places it directly in HOME
+    remote_src: true
+  tags:
+    - tmux_config
+
+- name: Ensure .tmux/plugins directory exists for TPM
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.tmux/plugins"
+    state: directory
+    mode: '0755'
+  tags:
+    - tmux_tpm
+
+- name: Check if TPM (Tmux Plugin Manager) is cloned
+  ansible.builtin.stat:
+    path: "{{ ansible_env.HOME }}/.tmux/plugins/tpm"
+  register: tpm_stat
+  tags:
+    - tmux_tpm
+
+- name: Clone TPM (Tmux Plugin Manager)
+  ansible.builtin.git:
+    repo: 'https://github.com/tmux-plugins/tpm.git'
+    dest: "{{ ansible_env.HOME }}/.tmux/plugins/tpm"
+    depth: 1
+  when: not tpm_stat.stat.exists
+  tags:
+    - tmux_tpm
+
+- name: Attempt to source tmux.conf (best effort)
+  ansible.builtin.command:
+    cmd: "tmux source-file {{ ansible_env.HOME }}/.tmux.conf"
+  changed_when: false # We can't reliably tell if this changed state or succeeded without more complex checks
+  failed_when: false # Don't fail the playbook if tmux isn't running or this command fails
+  register: tmux_source_result
+  tags:
+    - tmux_source
+
+- name: Inform user about tmux plugin installation
+  ansible.builtin.debug:
+    msg: "Tmux setup complete. If tmux is running, plugins can be installed by pressing 'prefix + I'. If tmux was not running, they will be installed when tmux starts. The command 'tmux source-file ~/.tmux.conf' was attempted."
+  tags:
+    - tmux_source

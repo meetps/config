@@ -1,0 +1,29 @@
+---
+- name: Install base packages
+  become: true # To use sudo for apt
+  ansible.builtin.apt:
+    name:
+      - git
+      - unzip
+      - wget
+    state: present
+    update_cache: true
+  tags:
+    - packages
+
+- name: Ensure config directory exists
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.mconfig"
+    state: directory
+    mode: '0755'
+  tags:
+    - mconfig_repo
+
+- name: Clone or update mconfig repository
+  ansible.builtin.git:
+    repo: 'https://github.com/meetps/config.git' # Using the public repo for now
+    dest: "{{ ansible_env.HOME }}/.mconfig"
+    version: master # Or main, depending on the default branch
+    force: true # Overwrite local changes if any, to mimic pull
+  tags:
+    - mconfig_repo

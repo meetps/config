@@ -1,0 +1,46 @@
+---
+- name: Copy gitconfig
+  ansible.builtin.copy:
+    src: "{{ ansible_env.HOME }}/.mconfig/git/gitconfig"
+    dest: "{{ ansible_env.HOME }}/.gitconfig"
+    remote_src: true
+  tags:
+    - configuration
+
+- name: Ensure .ipython directory exists
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.ipython"
+    state: directory
+    mode: '0755'
+  tags:
+    - configuration
+
+- name: Copy ipython_config
+  ansible.builtin.copy:
+    src: "{{ ansible_env.HOME }}/.mconfig/python/ipython_config"
+    dest: "{{ ansible_env.HOME }}/.ipython/ipython_config.py"
+    remote_src: true
+  tags:
+    - configuration
+
+- name: Ensure .config/ranger directory exists
+  ansible.builtin.file:
+    path: "{{ ansible_env.HOME }}/.config/ranger"
+    state: directory
+    mode: '0755'
+  tags:
+    - configuration
+
+- name: Copy ranger configuration files
+  ansible.builtin.copy:
+    src: "{{ ansible_env.HOME }}/.mconfig/ranger/{{ item }}"
+    dest: "{{ ansible_env.HOME }}/.config/ranger/{{ item }}"
+    remote_src: true
+  loop:
+    - commands.py
+    - commands_full.py
+    - rc.conf
+    - rifle.conf
+    - scope.sh
+  tags:
+    - configuration
