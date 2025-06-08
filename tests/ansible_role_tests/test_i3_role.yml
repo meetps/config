@@ -1,0 +1,72 @@
+---
+- name: Test i3 role
+  hosts: localhost
+  connection: local
+  gather_facts: yes
+  become: yes # For package installations and PPA
+
+  pre_tasks:
+    - name: Ensure .mconfig directory exists (simulating basic_setup)
+      ansible.builtin.file:
+        path: "{{ ansible_env.HOME }}/.mconfig"
+        state: directory
+        mode: '0755'
+      become: no # This task doesn't need sudo
+    - name: Ensure i3 config directory exists in .mconfig (simulating basic_setup)
+      ansible.builtin.file:
+        path: "{{ ansible_env.HOME }}/.mconfig/i3"
+        state: directory
+        mode: '0755'
+      become: no
+    - name: Create dummy i3 config files in .mconfig (simulating basic_setup)
+      ansible.builtin.copy:
+        content: "-- test i3 file"
+        dest: "{{ ansible_env.HOME }}/.mconfig/i3/{{ item }}"
+      loop:
+        - config
+        - py3status_config
+        - chogadiya.py
+        - i3-battery-popup
+      become: no
+
+  roles:
+    - role: i3
+
+  post_tasks:
+    - name: Verify i3 config directory exists
+      ansible.builtin.stat:
+        path: "{{ ansible_env.HOME }}/.config/i3"
+      register: i3_config_dir
+      failed_when: not i3_config_dir.stat.exists or not i3_config_dir.stat.isdir
+      become: no
+
+    - name: Verify i3 config files exist
+      ansible.builtin.stat:
+        path: "{{ ansible_env.HOME }}/.config/i3/{{ item.path }}"
+      register: i3_config_files
+      loop:
+        - { path: 'config', isreg: true }
+        - { path: 'py3status_config', isreg: true }
+        - { path: 'chogadiya.py', isreg: true, isexec: true }
+        - { path: 'i3-battery-popup', isreg: true, isexec: true }
+      failed_when: >
+        not item.stat.exists or
+        (item.item.isreg and not item.stat.isreg) or
+        (item.item.isexec and not item.stat.executable)
+      loop_control:
+        label: "{{ item.item.path }}"
+      become: no
+
+    - name: Verify i3 related packages are installed
+      ansible.builtin.package_facts:
+        manager: auto
+      # No become here, package_facts should get info without it if possible
+
+    - name: Check for i3 installation
+      ansible.builtin.assert:
+        that:
+          - "'i3' in ansible_facts.packages"
+          - "'py3status' in ansible_facts.packages"
+          - "'rofi' in ansible_facts.packages"
+        fail_msg: "i3, py3status, or rofi not found in installed packages"
+        quiet: yes # Suppress noisy output on success

@@ -1,0 +1,40 @@
+---
+- name: Ensure rxvt-unicode package is installed
+  ansible.builtin.package:
+    name: rxvt-unicode
+    state: present
+  become: true
+
+- name: Create urxvt extension directory
+  ansible.builtin.file:
+    path: "~/.urxvt/ext"
+    state: directory
+    mode: "0755"
+
+- name: Copy urxvt extensions
+  ansible.builtin.copy:
+    src: "urxvt/ext/"
+    dest: "~/.urxvt/ext/"
+    directory_mode: true
+
+- name: Copy Xdefaults configuration
+  ansible.builtin.copy:
+    src: "urxvt/Xdefaults"
+    dest: "~/.Xdefaults"
+    mode: "0644"
+
+- name: Load Xdefaults
+  ansible.builtin.command:
+    cmd: "xrdb {{ ansible_env.HOME }}/.Xdefaults"
+  environment: # xrdb might need DISPLAY
+    DISPLAY: ":0"
+    HOME: "{{ ansible_env.HOME }}" # Ensure HOME is set for xrdb
+  register: xrdb_load_xdefaults_result
+  changed_when: xrdb_load_xdefaults_result.rc == 0
+  failed_when: xrdb_load_xdefaults_result.rc != 0
+  # This command might fail if no X server is running.
+  # For CI, consider ignore_errors: true or a more nuanced failed_when.
+  # For now, strict failure.
+  when: ansible_env.HOME is defined and ansible_env.HOME != "" # Ensure HOME is defined
+  tags:
+    - urxvt_config

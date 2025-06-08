@@ -1,0 +1,33 @@
+---
+- name: Add Rofi PPA
+  ansible.builtin.apt_repository:
+    repo: ppa:jasonpleau/rofi
+    state: present
+  become: true
+
+- name: Install i3 packages
+  ansible.builtin.package:
+    name:
+      - py3status
+      - i3
+      - i3lock
+      - rofi
+    state: present
+  become: true
+
+- name: Create i3 configuration directory
+  ansible.builtin.file:
+    path: "~/.config/i3"
+    state: directory
+    mode: "0755"
+
+- name: Copy i3 configuration files
+  ansible.builtin.copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: "{{ item.mode | default('0644') }}"
+  loop:
+    - { src: "i3/config", dest: "~/.config/i3/config" }
+    - { src: "i3/py3status_config", dest: "~/.config/i3/py3status_config" }
+    - { src: "i3/chogadiya.py", dest: "~/.config/i3/chogadiya.py", mode: "0755" }
+    - { src: "i3/i3-battery-popup", dest: "~/.config/i3/i3-battery-popup", mode: "0755" }

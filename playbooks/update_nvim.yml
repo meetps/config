@@ -1,0 +1,7 @@
+---
+- name: Update nvim configuration
+  hosts: localhost
+  connection: local
+  roles:
+    - role: basic_setup # Ensure .mconfig is up-to-date
+    - role: nvim

@@ -1,5 +1,5 @@
 ---
-- name: Install server configuration
+- name: Install laptop configuration
   hosts: localhost
   connection: local
   roles:
@@ -9,3 +9,5 @@
     - role: zsh
     - role: tmux
     - role: nvim
+    - role: urxvt
+    - role: i3
