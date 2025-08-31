@@ -1,22 +1,17 @@
 [user]
 	name = meetps
 	email = meetshah1995@gmail.com
-
 [url "https://github.com/"]
     insteadOf = gh:
-
 [url "https://gist.github.com/"]
     insteadOf = gist:
-
 [url "https://bitbucket.org/"]
     insteadOf = bb:
-
 [credential]
 	helper = cache
 [core]
     editor = vim
-    pager = "diff-so-fancy | less --tabs=4 -RFX"
-
+    pager = delta
 [push]
     default = simple
 [color]
@@ -24,3 +19,11 @@
 [alias]
     lg = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
     st = "status"
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    navigate = true
+    side-by-side = true
+    line-numbers = true
+    dark = true
+    features = decorations line-numbers
