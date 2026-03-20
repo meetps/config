@@ -91,7 +91,17 @@ tmux_update() {
     echo "tmux updated";
 }
 
+ghostty_update() {
+    sudo /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/mkasberg/ghostty-ubuntu/HEAD/install.sh)"
+    mkdir -p $HOME/.config/ghostty/
+    cp -r $CONFIGDIR/ghostty/config $HOME/.config/ghostty/
+    echo "ghostty updated";
+}
+
+# TODO(meetps): Remove once ghostty is stable.
 urxvt_update() {
+    sudo /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/mkasberg/ghostty-ubuntu/HEAD/install.sh)"
+
     sudo apt-get install -y --no-install-recommends rxvt-unicode
     mkdir -p $HOME/.urxvt/ext/
     cp -r $CONFIGDIR/urxvt/ext $HOME/.urxvt/
@@ -138,6 +148,7 @@ if [ "$1" = "server" ] ; then
 elif [ "$1" = "laptop" ] ; then
     common_update
     urxvt_update
+    ghostty_update
     i3_update
 else
     echo "Only laptop and server supported, $1 not supported"
