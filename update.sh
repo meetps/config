@@ -18,6 +18,8 @@ case $1 in
         i3_update ;;
     --urxvt )
         urxvt_update ;;
+    --ghostty )
+        ghostty_update ;;
     *)
     echo "Update for module $1 is not supported";;
 esac

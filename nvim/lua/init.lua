@@ -33,6 +33,11 @@ api.nvim_command [[nnoremap <C-K> <C-W><C-K>]]
 api.nvim_command [[nnoremap <C-L> <C-W><C-L>]]
 api.nvim_command [[nnoremap <C-H> <C-W><C-H>]]
 
+api.nvim_command [[tnoremap <C-h> <C-\><C-n><C-w>h]]
+api.nvim_command [[tnoremap <C-j> <C-\><C-n><C-w>j]]
+api.nvim_command [[tnoremap <C-k> <C-\><C-n><C-w>k]]
+api.nvim_command [[tnoremap <C-l> <C-\><C-n><C-w>l]]
+
 api.nvim_command [[nnoremap <Tab> :bnext<CR>]]
 api.nvim_command [[nnoremap <S-Tab> :bprevious<CR>]]
 
@@ -73,6 +78,7 @@ require("lazy").setup({
   "nvim-tree/nvim-web-devicons",
   "blueyed/vim-diminactive",
   "junegunn/goyo.vim",
+  "dustinblackman/oatmeal.nvim",
   { "akinsho/bufferline.nvim", tag = "v3.7.0", requires = 'nvim-tree/nvim-web-devicons' },
   { "folke/trouble.nvim", requires = "kyazdani42/nvim-web-devicons" }
 })
@@ -124,7 +130,16 @@ require("nvim-tree").setup({
         custom = { '.ruff_cache', '.git' },
     },
 })
-
+require("oatmeal").setup({
+    cmd = { "Oatmeal" },
+    keys = {
+        { "<leader>om", mode = "n", desc = "Start Oatmeal session" },
+    },
+    opts = {
+        backend = "ollama",
+        model = "phi3:latest",
+    },
+})
 require("lsp") -- CiderLSP
 require("diagnostics") -- Diagnostics
 require('lualine').setup {
