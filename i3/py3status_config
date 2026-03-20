@@ -91,6 +91,12 @@ external_script chogadiya {
     cache_timeout = 1200
 }
 
+external_script finance {
+    format = "{output}"
+    script_path = "python /usr/bin/finance.py"
+    cache_timeout = 1200
+}
+
 
 volume_status {
     thresholds = [
