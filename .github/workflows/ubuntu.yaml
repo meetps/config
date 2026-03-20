@@ -1,0 +1,13 @@
+name: CI
+on: 
+  push:
+  schedule:
+    - cron: '0 0 * * 0' # Runs at 00:00 UTC every Sunday
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4 # Checks out the current repository
+      - name: "Install.sh"
+        run: "bash install.sh server"
